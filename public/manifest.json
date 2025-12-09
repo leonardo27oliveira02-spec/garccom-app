@@ -1,0 +1,15 @@
+{
+  "name": "ComandaPro",
+  "short_name": "ComandaPro",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0F24",
+  "theme_color": "#0A0F24",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
