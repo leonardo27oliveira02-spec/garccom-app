@@ -1,15 +1,9 @@
 {
-  "name": "ComandaPro",
-  "short_name": "ComandaPro",
-  "start_url": "/",
+  "name": "GarçCom App",
+  "short_name": "GarçCom",
+  "start_url": "/garccom-app/",
   "display": "standalone",
-  "background_color": "#0A0F24",
-  "theme_color": "#0A0F24",
-  "icons": [
-    {
-      "src": "/icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "background_color": "#FF6B6B",
+  "theme_color": "#FEC107",
+  "description": "Sistema de Comunicação Inteligente para Restaurantes"
 }

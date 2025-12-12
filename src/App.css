@@ -718,3 +718,115 @@ body {
     grid-template-columns: 1fr;
   }
 }
+/* ADMIN CARDÁPIO */
+.admin-container {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.admin-form {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+
+.admin-list {
+  margin-top: 20px;
+}
+
+.admin-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.admin-item-info {
+  flex: 1;
+}
+
+.admin-item-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.admin-item-edit {
+  background: #f0f0ff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #667eea;
+}
+
+/* RESPONSIVIDADE MOBILE */
+@media (max-width: 768px) {
+  /* Painel Cozinha */
+  .cozinha-container {
+    padding: 10px;
+  }
+  
+  .cozinha-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .cozinha-title {
+    font-size: 24px;
+  }
+  
+  .cozinha-columns {
+    grid-template-columns: 1fr;
+  }
+  
+  .column-content {
+    max-height: 50vh;
+  }
+  
+  /* Admin e Cadastro */
+  .admin-container,
+  .pedido-container {
+    padding: 15px;
+    max-height: 95vh;
+  }
+  
+  .pedido-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .pedido-title {
+    font-size: 20px;
+  }
+  
+  .admin-item {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .admin-item-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  
+  .admin-item-actions button {
+    flex: 1;
+    min-width: 100px;
+  }
+  
+  /* Dashboard Admin */
+  .mesas-container {
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+}

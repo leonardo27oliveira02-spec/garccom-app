@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Login from './components/Login';
 import MesasList from './components/MesasList';
@@ -8,14 +8,38 @@ import PainelCozinha from './components/PainelCozinha';
 import GerenciarCardapio from './components/GerenciarCardapio';
 import FecharMesa from './components/FecharMesa';
 import CadastrarFuncionario from './components/CadastrarFuncionario';
+import PainelAdmin from './components/PainelAdmin';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
   const [userData, setUserData] = useState(null);
   const [selectedMesa, setSelectedMesa] = useState(null);
 
+  // CARREGAR SESSÃO AO INICIAR
+  useEffect(() => {
+    const sessao = localStorage.getItem('garccom_sessao');
+    if (sessao) {
+      try {
+        const user = JSON.parse(sessao);
+        setUserData(user);
+        
+        if (user.tipo === 'cozinha') {
+          setCurrentPage('cozinha');
+        } else {
+          setCurrentPage('mesas');
+        }
+      } catch (error) {
+        console.error('Erro ao carregar sessão:', error);
+        localStorage.removeItem('garccom_sessao');
+      }
+    }
+  }, []);
+
   const handleLogin = (user) => {
     setUserData(user);
+    
+    // SALVAR SESSÃO
+    localStorage.setItem('garccom_sessao', JSON.stringify(user));
     
     if (user.tipo === 'cozinha') {
       setCurrentPage('cozinha');
@@ -25,6 +49,9 @@ function App() {
   };
 
   const handleLogout = () => {
+    // LIMPAR SESSÃO
+    localStorage.removeItem('garccom_sessao');
+    
     setUserData(null);
     setCurrentPage('login');
     setSelectedMesa(null);
@@ -63,6 +90,7 @@ function App() {
           onAdmin={() => setCurrentPage('admin-cardapio')}
           onFecharMesa={handleFecharMesa}
           onGerenciarEquipe={() => setCurrentPage('cadastrar-funcionario')}
+          onDashboard={() => setCurrentPage('admin-dashboard')}
           onLogout={handleLogout}
         />
       )}
@@ -106,6 +134,13 @@ function App() {
 
       {currentPage === 'cadastrar-funcionario' && (
         <CadastrarFuncionario 
+          userData={userData}
+          onVoltar={handleVoltar}
+        />
+      )}
+
+      {currentPage === 'admin-dashboard' && (
+        <PainelAdmin 
           userData={userData}
           onVoltar={handleVoltar}
         />

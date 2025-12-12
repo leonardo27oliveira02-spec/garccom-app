@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../services/supabase';
+import { verificarResetDiario } from '../services/resetDiario';
 
 function Login({ onLogin }) {
   const [nome, setNome] = useState('');
@@ -14,7 +15,6 @@ function Login({ onLogin }) {
 
     setLoading(true);
 
-    // Autenticar com Supabase (garçom OU cozinha)
     try {
       const { data, error } = await supabase
         .from('usuarios')
@@ -26,6 +26,9 @@ function Login({ onLogin }) {
       if (error) throw error;
 
       if (data) {
+        // VERIFICAR RESET DIÁRIO
+        await verificarResetDiario(data.restaurante_id);
+        
         alert(`Bem-vindo, ${data.nome}!`);
         onLogin(data);
       }
@@ -47,7 +50,7 @@ function Login({ onLogin }) {
     <div className="login-container">
       <div className="login-header">
         <div className="login-icon">🍽️</div>
-        <h1 className="login-title">GarçomTech</h1>
+        <h1 className="login-title">ComandaPro</h1>
         <p className="login-subtitle">Sistema de Pedidos Inteligente</p>
       </div>
 
@@ -86,12 +89,6 @@ function Login({ onLogin }) {
         >
           {loading ? 'Entrando...' : 'Entrar →'}
         </button>
-
-        <div style={{ marginTop: '20px', fontSize: '12px', color: '#999', textAlign: 'center' }}>
-          💡 Dados de teste:<br />
-          Garçom → João Silva / 1234<br />
-          Cozinha → Carlos / 9999
-        </div>
       </div>
     </div>
   );

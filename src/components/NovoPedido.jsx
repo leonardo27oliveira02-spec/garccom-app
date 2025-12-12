@@ -117,9 +117,7 @@ function NovoPedido({ mesa, userData, onVoltar }) {
       }));
 
       await supabase.from('itens_pedido').insert(itens);
-      await supabase.from('mesas').update({ status: 'pedido_pendente' }).eq('id', mesa.id);
-
-      const mensagem = bebidas.length > 0 
+      await supabase.from('mesas').update({ status: 'ocupada' }).eq('id', mesa.id);      const mensagem = bebidas.length > 0 
         ? `✅ Pedido enviado para COZINHA!\n\n🍔 ${comidas.length} comidas\n🥤 ${bebidas.length} bebidas\n\nMesa ${mesa.numero}\nTotal: R$ ${calcularTotal().toFixed(2)}`
         : `✅ Pedido enviado para COZINHA!\n\nMesa ${mesa.numero}\nTotal: R$ ${calcularTotal().toFixed(2)}`;
 
